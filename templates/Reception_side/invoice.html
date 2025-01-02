@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:20 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Reception Home</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/static/admin_style/img/favicon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/admin_style/css/bootstrap.min.css">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="/static/admin_style/css/font-awesome.min.css">
+
+    <!-- Feathericon CSS -->
+    <link rel="stylesheet" href="/static/admin_style/css/feathericon.min.css">
+
+    <link rel="stylesheet" href="/static/admin_style/plugins/morris/morris.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/static/admin_style/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="/static/admin_style/js/html5shiv.min.js"></script>
+    <script src="/static/admin_style/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+
+    <!-- Header -->
+    <div class="header">
+
+        <!-- Logo -->
+        <div class="header-left">
+            <a href="/reception/reception_dashbord/" class="logo">
+                <img src="/static/admin_style/img/logo.png" alt="Logo">
+            </a>
+            <a href="/reception/reception_dashbord/" class="logo logo-small">
+                <img src="/static/admin_style/img/logo-small.png" alt="Logo" width="30" height="30">
+            </a>
+        </div>
+        <!-- /Logo -->
+
+        <a href="javascript:void(0);" id="toggle_btn">
+            <i class="fe fe-text-align-left"></i>
+        </a>
+
+
+        <!-- Mobile Menu Toggle -->
+        <a class="mobile_btn" id="mobile_btn">
+            <i class="fa fa-bars"></i>
+        </a>
+        <!-- /Mobile Menu Toggle -->
+
+        <!-- Header Right Menu -->
+        <ul class="nav user-menu">
+
+
+            <!-- User Menu -->
+            <li class="nav-item dropdown has-arrow">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <span class="user-img"><img class="rounded-circle"
+                                                src="/static/admin_style/img/profiles/avatar-01.jpg" width="31"
+                                                alt="Ryan Taylor"></span>
+                </a>
+                <div class="dropdown-menu">
+                    <div class="user-header">
+                        <div class="avatar avatar-sm">
+                            <img src="/static/admin_style/img/profiles/avatar-01.jpg" alt="User Image"
+                                 class="avatar-img rounded-circle">
+                        </div>
+                        text
+                        <div class="user-text">
+                            <h6>{{user}}</h6>
+                            <p class="text-muted mb-0">Administrator</p>
+                        </div>
+                    </div>
+                    <a class="dropdown-item" href="/reception_logout">Logout</a>
+                </div>
+            </li>
+            <!-- /User Menu -->
+
+        </ul>
+        <!-- /Header Right Menu -->
+
+    </div>
+    <!-- /Header -->
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div id="sidebar-menu" class="sidebar-menu">
+                <ul>
+                    <li class="menu-title">
+                        <span>Main</span>
+                    </li>
+                    <li class="active">
+                        <a href="/reception/reception_dashbord/"><i class="fe fe-home"></i> <span>Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a href="/reception/appointments/"><i class="fe fe-layout"></i> <span>Appointments</span></a>
+                    </li>
+                    <li>
+                        <a href="/reception/add_appointment/"><i class="fe fe-layout"></i> <span>Add Appointment</span></a>
+                    </li>
+                    <li>
+                        <a href="/reception/doctor/"><i class="fe fe-user-plus"></i> <span>Doctors</span></a>
+                    </li>
+                    <li>
+                        <a href="/reception/patient/"><i class="fe fe-user"></i> <span>Patients</span></a>
+                    </li>
+                    <li>
+                        <a href="/reception/add_new_patient/"><i class="fe fe-user-plus"></i>
+                            <span>Add Patient</span></a>
+                    </li>
+                    <li>
+                        <a href="/reception/invoice/"><i class="fe fe-star-o"></i> <span>Invoice</span></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Sidebar -->
+
+    <!-- Invoice Start -->
+    <div style="font-family: Arial, sans-serif; color: #333; margin-left: 250px;">
+        <form method="post"
+              style="border: 2px solid #ddd; padding: 20px; width: 950px; margin: 0 auto; background-color: #f9f9f9; margin-top: 100px; height: auto;">
+            {% csrf_token %}
+            <h1 style="text-align: center; color: #2c3e50;">Hospital Bill Invoice</h1><br>
+
+            <!-- Hospital Information -->
+            <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                <div style="width: 45%;">
+                    <h4 style="margin: 0;">Hospital Information</h4>
+                    <p style="margin: 5px 0;">Hospital Name: XYZ General Hospital</p>
+                    <p style="margin: 5px 0;">Address: 123 Main St, City, Country</p>
+                    <p style="margin: 5px 0;">Phone: (123) 456-7890</p>
+                    <p style="margin: 5px 0;">Email: contact@xyzhospital.com</p>
+                </div>
+            </div>
+            <br>
+
+            <!-- Patient Information -->
+            <div style="margin-bottom: 40px; display: flex; flex-wrap: wrap; justify-content: space-between;">
+                <div style="flex: 0 0 48%; margin-bottom: 10px;">
+                    <label for="patient_name" style="display: block;">Patient Name:</label>
+                    <input type="text" id="patient_name" name="patient_name" value=""
+                           style="width: 100%; padding: 8px; margin: 5px 0;" required>
+                </div>
+                <div hidden="hidden" style="flex: 0 0 48%; margin-bottom: 10px;">
+                    <label for="patient_id" style="display: block;">Patient ID:</label>
+                    <input type="text" id="patient_id" name="patient_id" value="{{pid}}"
+                           style="width: 100%; padding: 8px; margin: 5px 0;" required>
+                </div>
+                <div style="flex: 0 0 48%; margin-bottom: 10px;">
+                    <label for="patient_id" style="display: block;">Patient ID:</label>
+                    <input type="text" id="patient_id1" name="patient_id" value="{{pid}}"
+                           disabled style="width: 100%; padding: 8px; margin: 5px 0;" required>
+                </div>
+
+                <div style="flex: 0 0 48%; margin-bottom: 10px;">
+                    <label for="dob" style="display: block;">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" value="1985-01-01"
+                           style="width: 100%; padding: 8px; margin: 5px 0;" required>
+                </div>
+                <div style="flex: 0 0 48%; margin-bottom: 10px;">
+                    <label for="admission_date" style="display: block;">Admission Date:</label>
+                    <input type="date" id="admission_date" name="admission_date" value="2024-11-01"
+                           style="width: 100%; padding: 8px; margin: 5px 0;" required>
+                </div>
+                <div style="flex: 0 0 48%; margin-bottom: 10px;">
+                    <label for="discharge_date" style="display: block;">Discharge Date:</label>
+                    <input type="date" id="discharge_date" name="discharge_date" value="2024-11-05"
+                           style="width: 100%; padding: 8px; margin: 5px 0;" required>
+                </div>
+            </div>
+
+            <!-- Billing Details -->
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                <thead>
+                <tr style="background-color: #ecf0f1;">
+                    <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Description</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; text-align: center;">Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Room Charges (5 days)</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                        <input type="number" id="room_charges" name="room_charge" value="500.00"
+                               style="width: 80%; padding: 8px; text-align: center;" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Doctor's Consultation</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                        <input type="number" id="doctor_consultation" name="doctor_charge" value="150.00"
+                               style="width: 80%; padding: 8px; text-align: center;" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Laboratory Tests</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                        <input type="number" id="lab_tests" name="laboratory_charge" value="100.00"
+                               style="width: 80%; padding: 8px; text-align: center;" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Medication</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                        <input type="number" id="medication" name="medication" value="80.00"
+                               style="width: 80%; padding: 8px; text-align: center;" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Total Amount</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center; font-weight: bold;">
+                        <input type="number" id="total_amount" name="total_amount" value="830.00"
+                               style="width: 80%; padding: 8px; text-align: center;" readonly>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- Generate Invoice Button -->
+            <div style="text-align: center; margin-bottom: 30px;">
+                <button type="submit" onclick="generateInvoice()"
+                        style="padding: 10px 20px; font-size: 16px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    Generate Invoice
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <div style="text-align: center; font-size: 14px; color: #7f8c8d; margin-top: 30px;">
+                <p>Thank you for choosing XYZ General Hospital. If you have any questions, please contact us at (123)
+                    456-7890.</p>
+            </div>
+        </form>
+    </div>
+    <!--    Invoice End-->
+</div>
+<!-- /Main Wrapper -->
+
+
+<!-- jQuery -->
+<script src="/static/admin_style/js/jquery-3.2.1.min.js"></script>
+
+<!-- Bootstrap Core JS -->
+<script src="/static/admin_style/js/popper.min.js"></script>
+<script src="/static/admin_style/js/bootstrap.min.js"></script>
+
+<!-- Slimscroll JS -->
+<script src="/static/admin_style/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<script src="/static/admin_style/plugins/raphael/raphael.min.js"></script>
+<script src="/static/admin_style/plugins/morris/morris.min.js"></script>
+<script src="/static/admin_style/js/chart.morris.js"></script>
+
+<!-- Custom JS -->
+<script src="/static/admin_style/js/script.js"></script>
+
+<script>
+    // Function to update the total amount
+    function updateTotalAmount() {
+        // Get values from the input fields
+        const roomCharges = parseFloat(document.getElementById('room_charges').value) || 0;
+        const doctorConsultation = parseFloat(document.getElementById('doctor_consultation').value) || 0;
+        const labTests = parseFloat(document.getElementById('lab_tests').value) || 0;
+        const medication = parseFloat(document.getElementById('medication').value) || 0;
+
+        // Calculate the total amount
+        const totalAmount = roomCharges + doctorConsultation + labTests + medication;
+
+        // Update the Total Amount field
+        document.getElementById('total_amount').value = totalAmount.toFixed(2);
+
+        // Update the Remaining Balance
+        const amountPaid = parseFloat(document.getElementById('amount_paid').value) || 0;
+        const remainingBalance = totalAmount - amountPaid;
+        document.getElementById('remaining_balance').value = remainingBalance.toFixed(2);
+    }
+
+    // Attach the function to input events for automatic calculation
+    window.onload = function() {
+        // Attach the updateTotalAmount function to all the input fields
+        const inputs = document.querySelectorAll('input[type="number"], input[type="text"], input[type="date"]');
+        inputs.forEach(input => {
+            input.addEventListener('input', updateTotalAmount);
+        });
+    };
+</script>
+
+<script>
+    function generateInvoice() {
+        // Logic to generate the invoice goes here
+        alert("Invoice has been Saved!");
+    }
+</script>
+</body>
+
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:34 GMT -->
+</html>

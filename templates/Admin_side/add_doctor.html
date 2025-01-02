@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:20 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Add Doctor</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/static/admin_style/img/favicon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/admin_style/css/bootstrap.min.css">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="/static/admin_style/css/font-awesome.min.css">
+
+    <!-- Feathericon CSS -->
+    <link rel="stylesheet" href="/static/admin_style/css/feathericon.min.css">
+
+    <link rel="stylesheet" href="/static/admin_style/plugins/morris/morris.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/static/admin_style/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="/static/admin_style/js/html5shiv.min.js"></script>
+    <script src="/static/admin_style/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+
+    <!-- Header -->
+    <div class="header">
+
+        <!-- Logo -->
+        <div class="header-left">
+            <a href="/admin_side/admin_dashbord/" class="logo">
+                <img src="/static/admin_style/img/logo.png" alt="Logo">
+            </a>
+            <a href="/admin_side/admin_dashbord/" class="logo logo-small">
+                <img src="/static/admin_style/img/logo-small.png" alt="Logo" width="30" height="30">
+            </a>
+        </div>
+        <!-- /Logo -->
+
+        <a href="javascript:void(0);" id="toggle_btn">
+            <i class="fe fe-text-align-left"></i>
+        </a>
+
+
+        <!-- Mobile Menu Toggle -->
+        <a class="mobile_btn" id="mobile_btn">
+            <i class="fa fa-bars"></i>
+        </a>
+        <!-- /Mobile Menu Toggle -->
+
+        <!-- Header Right Menu -->
+        <ul class="nav user-menu">
+
+
+            <!-- User Menu -->
+            <li class="nav-item dropdown has-arrow">
+                <a href="/admin_side/admin_dashbord/" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <span class="user-img"><img class="rounded-circle"
+                                                src="/static/admin_style/img/profiles/avatar-01.jpg" width="31"
+                                                alt="Ryan Taylor"></span>
+                </a>
+                <div class="dropdown-menu">
+                    <div class="user-header">
+                        <div class="avatar avatar-sm">
+                            <img src="/static/admin_style/img/profiles/avatar-01.jpg" alt="User Image"
+                                 class="avatar-img rounded-circle">
+                        </div>
+                        <div class="user-text">
+                            <h6>{{user}}</h6>
+                            <p class="text-muted mb-0">Administrator</p>
+                        </div>
+                    </div>
+
+                </div>
+            </li>
+            <!-- /User Menu -->
+
+        </ul>
+        <!-- /Header Right Menu -->
+
+    </div>
+    <!-- /Header -->
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div id="sidebar-menu" class="sidebar-menu">
+                <ul>
+                    <li class="menu-title">
+                        <span>Main</span>
+                    </li>
+                    <li class="active">
+                        <a href="/admin_side/admin_dashbord/"><i class="fe fe-home"></i> <span>Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a href="/admin_side/show_appointment/"><i class="fe fe-layout"></i>
+                            <span>Appointments</span></a>
+                    </li>
+
+                    <li>
+                        <a href="/admin_side/add_doctor/"><i class="fe fe-user-plus"></i> <span>Add Doctors</span></a>
+                    </li>
+
+                    <li>
+                        <a href="/admin_side/show_doctor/"><i class="fe fe-user-plus"></i> <span>Show Doctors</span></a>
+                    </li>
+
+                    <li>
+                        <a href="/admin_side/show_patients/"><i class="fe fe-user"></i> <span>Show Patients</span></a>
+                    </li>
+
+                    <li>
+                        <a href="/admin_side/add_staff/"><i class="fe fe-user"></i> <span>Add Staff</span></a>
+                    </li>
+
+                    <li>
+                        <a href="/admin_side/show_staff/"><i class="fe fe-user"></i> <span>Show Staff</span></a>
+                    </li>
+
+                    <li>
+                        <a href="/admin-logout"><i class="fe fe-user"></i> <span>Logout</span></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Sidebar -->
+
+    <!-- Doctor Registration Form -->
+
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Add Doctor</h4>
+                            <center>
+                                <h4>{{msg}}</h4>
+                            </center>
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Doctor's Name:</label>
+                                            <input type="text" id="name" name="name" required class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email">Email:</label>
+                                            <input type="email" id="email" name="email" required class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="phone">Phone Number:</label>
+                                            <input type="tel" id="phone" name="mobile" required class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="dob">Date of Birth:</label>
+                                            <input type="date" id="dob" name="dob" required class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="gender">Gender:</label>
+                                            <select id="gender" name="gender" required class="form-control">
+                                                <option value="">Select Gender</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="degree">Degree:</label>
+                                            <select id="degree" name="degree" required class="form-control">
+                                                <option value="">Select Degree</option>
+                                                <option value="mbbs">MBBS</option>
+                                                <option value="md">MD</option>
+                                                <option value="ms">MS</option>
+                                                <option value="dnb">DNB</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="specialization">Specialization:</label>
+                                            <select id="specialization" name="specialization" required
+                                                    class="form-control">
+                                                <option value="" disabled selected>Select Specialization</option>
+                                                <option value="Cardiology">Cardiology</option>
+                                                <option value="Orthopedics">Orthopedics</option>
+                                                <option value="Neurology">Neurology</option>
+                                                <option value="Pediatrics">Pediatrics</option>
+                                                <option value="Dermatology">Dermatology</option>
+                                                <option value="Psychiatry">Psychiatry</option>
+                                                <option value="Gynecology">Gynecology</option>
+                                                <option value="Dentistry">Dentistry</option>
+                                                <option value="General Surgery">General Surgery</option>
+                                                <option value="Anesthesiology">Anesthesiology</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="address">Address:</label>
+                                    <input type="text" id="address" name="address" required class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="experience">Years of Experience:</label>
+                                    <input type="number" id="experience" name="year_of_experienc" required
+                                           class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="image">Profile Image:</label>
+                                    <input type="file" id="image" name="profile_image" required
+                                           class="form-control">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Register Doctor</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Doctor Registration Form -->
+
+
+</div>
+<!-- /Main Wrapper -->
+
+<!-- jQuery -->
+<script src="/static/admin_style/js/jquery-3.2.1.min.js"></script>
+
+<!-- Bootstrap Core JS -->
+<script src="/static/admin_style/js/popper.min.js"></script>
+<script src="/static/admin_style/js/bootstrap.min.js"></script>
+
+<!-- Slimscroll JS -->
+<script src="/static/admin_style/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<script src="/static/admin_style/plugins/raphael/raphael.min.js"></script>
+<script src="/static/admin_style/plugins/morris/morris.min.js"></script>
+<script src="/static/admin_style/js/chart.morris.js"></script>
+
+<!-- Custom JS -->
+<script src="/static/admin_style/js/script.js"></script>
+
+
+</body>
+
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:34 GMT -->
+</html>

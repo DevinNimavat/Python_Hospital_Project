@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Bill Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-size: 14px;
+            color: #555;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 6px;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .invoice-box {
+            padding: 20px;
+            margin-top: 30px;
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .invoice-box p {
+            font-size: 16px;
+            color: #333;
+        }
+        .invoice-box .total {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+        }
+        .error {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <h1>Generate Bill Invoice</h1>
+
+        <!-- Patient Name Input -->
+        <div class="form-group">
+            <label for="patient_name">Patient Name:</label>
+            <input type="text" id="patient_name" name="patient_name" value="{{invoice.patient_name}}">
+        </div>
+
+        <div style="text-align: center;">
+            <button type="submit">Generate Invoice</button>
+        </div>
+    </form>
+</div>
+
+{% if invoice %}
+<div class="invoice-box">
+    <h2>Invoice for {{ invoice.patient_name }} (ID: {{ invoice.patient_id }})</h2>
+    <p>Room Charges: ₹{{ invoice.room_charge }}</p>
+    <p>Doctor's Consultation: ₹{{ invoice.doctor_charge }}</p>
+    <p>Laboratory Tests: ₹{{ invoice.laboratory_charge }}</p>
+    <p>Medication: ₹{{ invoice.medication }}</p>
+    <p class="total">Total Amount: ₹{{ invoice.total_amount }}</p>
+</div>
+
+<a href="/reception/invoice" style="color: #3498db;">Return to Invoice Details</a>
+
+{% elif error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+
+</body>
+</html>

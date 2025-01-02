@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Admin Dashboard</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/static/admin_style/img/favicon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/admin_style/css/bootstrap.min.css">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="/static/admin_style/css/font-awesome.min.css">
+
+    <!-- Feathericon CSS -->
+    <link rel="stylesheet" href="/static/admin_style/css/feathericon.min.css">
+
+    <link rel="stylesheet" href="/static/admin_style/plugins/morris/morris.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/static/admin_style/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="/static/admin_style/js/html5shiv.min.js"></script>
+    <script src="/static/admin_style/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<body style="display: flex; justify-content: center; align-items: flex-start; height: 100vh; margin: 0; font-family: Arial, sans-serif; padding: 20px;">
+
+<!-- Header -->
+<div class="header">
+
+    <!-- Logo -->
+    <div class="header-left">
+        <a href="/admin_side/admin_dashbord/" class="logo">
+            <img src="/static/admin_style/img/logo.png" alt="Logo">
+        </a>
+        <a href="/admin_side/admin_dashbord/" class="logo logo-small">
+            <img src="/static/admin_style/img/logo-small.png" alt="Logo" width="30" height="30">
+        </a>
+    </div>
+    <!-- /Logo -->
+
+    <a href="javascript:void(0);" id="toggle_btn">
+        <i class="fe fe-text-align-left"></i>
+    </a>
+
+
+    <!-- Mobile Menu Toggle -->
+    <a class="mobile_btn" id="mobile_btn">
+        <i class="fa fa-bars"></i>
+    </a>
+    <!-- /Mobile Menu Toggle -->
+
+    <!-- Header Right Menu -->
+    <ul class="nav user-menu">
+
+
+        <!-- User Menu -->
+        <li class="nav-item dropdown has-arrow">
+            <a href="/admin_side/admin_dashbord/" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <span class="user-img"><img class="rounded-circle"
+                                                src="/static/admin_style/img/profiles/avatar-01.jpg" width="31"
+                                                alt="Ryan Taylor"></span>
+            </a>
+            <div class="dropdown-menu">
+                <div class="user-header">
+                    <div class="avatar avatar-sm">
+                        <img src="/static/admin_style/img/profiles/avatar-01.jpg" alt="User Image"
+                             class="avatar-img rounded-circle">
+                    </div>
+                    <div class="user-text">
+                        <h6>{{user}}</h6>
+                        <p class="text-muted mb-0">Administrator</p>
+                    </div>
+                </div>
+                <!--                <a class="dropdown-item" href="profile.html">My Profile</a>-->
+                <!--                <a class="dropdown-item" href="/admin-logout">Logout</a>-->
+            </div>
+        </li>
+        <!-- /User Menu -->
+
+    </ul>
+    <!-- /Header Right Menu -->
+
+</div>
+<!-- /Header -->
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+            <ul>
+                <li class="menu-title">
+                    <span>Main</span>
+                </li>
+                <li class="active">
+                    <a href="/admin_side/admin_dashbord/"><i class="fe fe-home"></i> <span>Dashboard</span></a>
+                </li>
+                <li>
+                    <a href="/admin_side/show_appointment/"><i class="fe fe-layout"></i>
+                        <span>Appointments</span></a>
+                </li>
+
+                <li>
+                    <a href="/admin_side/add_doctor/"><i class="fe fe-user-plus"></i> <span>Add Doctors</span></a>
+                </li>
+
+                <li>
+                    <a href="/admin_side/show_doctor/"><i class="fe fe-user-plus"></i> <span>Show Doctors</span></a>
+                </li>
+
+                <li>
+                    <a href="/admin_side/show_patients/"><i class="fe fe-user"></i> <span>Show Patients</span></a>
+                </li>
+
+                <li>
+                    <a href="/admin_side/add_staff/"><i class="fe fe-user"></i> <span>Add Staff</span></a>
+                </li>
+
+                <li>
+                    <a href="/admin_side/show_staff/"><i class="fe fe-user"></i> <span>Show Staff</span></a>
+                </li>
+
+                <li>
+                    <a href="/admin-logout"><i class="fe fe-user"></i> <span>Logout</span></a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /Sidebar -->
+
+<!--margin-right: 50px;-->
+<div style="margin-top: 70px; margin-left: 230px; width: 900px; height: auto; padding: 30px; border: 2px solid ; border-radius: 8px; background-color: #f9f9f9; overflow-y: auto;">
+    <form id="staffRegistrationForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 style="text-align: center; margin-bottom: 30px; color: #333;">Staff Registration Form</h2>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; margin-bottom: 20px;">
+            <!-- Full Name and Email Address -->
+            <div style="width: 48%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                <label for="fullName" style="display: block; margin-bottom: 8px; font-weight: bold; color: #444;">Full
+                    Name:</label>
+                <input type="text" value="{{sta_id.name}}" id="fullName" name="name" required
+                       style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div style="width: 48%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                <label for="email" style="display: block; margin-bottom: 8px; font-weight: bold; color: #444;">Email
+                    Address:</label>
+                <input type="email" value="{{sta_id.email}}" id="email" name="email" required
+                       style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; margin-bottom: 20px;">
+            <!-- Phone Number and Blood Group -->
+            <div style="width: 48%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                <label for="phone" style="display: block; margin-bottom: 8px; font-weight: bold; color: #444;">Phone
+                    Number:</label>
+                <input type="tel" id="phone" value="{{sta_id.mobile}}" name="mobile" required
+                       style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div style="width: 48%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                <label for="bloodGroup" style="display: block; margin-bottom: 8px; font-weight: bold; color: #444;">Blood
+                    Group:</label>
+                <select id="bloodGroup" name="blood_group" required
+                        style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="{{sta_id.blood_group}}">Select Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="width: 100%; margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+            <label for="staff" style="display: block; margin-bottom: 8px; font-weight: bold; color: #444;">Select Staff
+                Type:</label>
+            <select id="staff" onchange="updateDepartmentOptions()" name="staff_type"
+                    style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="{{sta_id.staff_type}}">Staff Type</option>
+                <option value="clinical">Clinical Staff</option>
+                <option value="administrative">Administrative Staff</option>
+                <option value="support">Support Staff</option>
+                <option value="technical">Technical and IT Staff</option>
+                <option value="research">Research and Education</option>
+            </select>
+        </div>
+
+        <div style="width: 100%; margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+            <label for="department" style="display: block; margin-bottom: 8px; font-weight: bold; color: #444;">Select
+                Department:</label>
+            <select name="staff_department" id="department"
+                    style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;">
+                <!-- Options will be populated by JavaScript -->
+                <option value="{{sta_id.staff_department}}">Staff Department</option>
+
+            </select>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; margin-bottom: 20px;">
+            <!-- State and City -->
+            <div style="width: 48%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                <label for="state"
+                       style="display: block; margin-bottom: 8px; font-weight: bold; color: #444;">State:</label>
+                <input type="text" id="state" value="{{sta_id.state}}" name="state" required
+                       style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div style="width: 48%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                <label for="city"
+                       style="display: block; margin-bottom: 8px; font-weight: bold; color: #444;">City:</label>
+                <input type="text" id="city" value="{{sta_id.city}}" name="city" required
+                       style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+        </div>
+
+        <div style="width: 100%; margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+            <label for="education" style="display: block; margin-bottom: 8px; font-weight: bold; color: #444;">Education
+                Level:</label>
+            <select id="education" name="education" required
+                    style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="{{sta_id.education}}" disabled selected>Select Education Level</option>
+                <option value="high_school">High School</option>
+                <option value="undergraduate">Undergraduate</option>
+                <option value="postgraduate">Postgraduate</option>
+                <option value="doctorate">Doctorate</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <!-- File Upload field -->
+        <div style="width: 100%; margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+            <label for="fileUpload" style="display: block; margin-bottom: 8px; font-weight: bold; color: #444;">Upload
+                Document:</label>
+            <input type="file" id="fileUpload" value="{{sta_id.image}}" name="image"
+                   style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <button type="submit"
+                style="padding: 12px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 20px;">
+            Register Staff
+        </button>
+    </form>
+</div>
+
+
+<script>
+    function updateDepartmentOptions() {
+        const staffSelect = document.getElementById('staff');
+        const departmentSelect = document.getElementById('department');
+
+        // Clear current options
+        departmentSelect.innerHTML = '';
+
+        // Add options based on selected staff type
+        if (staffSelect.value === 'clinical') {
+            const clinicalOptions = [
+                { value: 'gp', text: 'General Practitioners (GPs)' },
+                { value: 'specialist', text: 'Specialist (e.g., Cardiologist, Oncologist, Pediatrician, etc.)' },
+                { value: 'rn', text: 'Registered Nurses (RNs)' },
+                { value: 'np', text: 'Nurse Practitioners (NPs)' },
+                { value: 'pa', text: 'Physician Assistants (PAs)' }
+            ];
+
+            clinicalOptions.forEach(option => {
+                const newOption = document.createElement('option');
+                newOption.value = option.value;
+                newOption.textContent = option.text;
+                departmentSelect.appendChild(newOption);
+            });
+        } else if (staffSelect.value === 'support') {
+            const supportOptGroup = document.createElement('optgroup');
+            supportOptGroup.label = 'Support Staff';
+
+            const supportOptions = [
+                { value: 'custodian', text: 'Custodians/Housekeepers' },
+                { value: 'dietary_aide', text: 'Dietary Aides' },
+                { value: 'security_officer', text: 'Hospital Security Officers' }
+            ];
+
+            supportOptions.forEach(option => {
+                const newOption = document.createElement('option');
+                newOption.value = option.value;
+                newOption.textContent = option.text;
+                supportOptGroup.appendChild(newOption);
+            });
+
+            departmentSelect.appendChild(supportOptGroup);
+        } else if (staffSelect.value === 'technical') {
+            const technicalOptions = [
+                { value: 'it_support', text: 'IT Support Specialist' },
+                { value: 'network_admin', text: 'Network Administrator' },
+                { value: 'system_admin', text: 'System Administrator' },
+                { value: 'database_admin', text: 'Database Administrator' },
+                { value: 'security_officer', text: 'Cybersecurity Specialist' },
+                { value: 'software_dev', text: 'Software Developer' }
+            ];
+
+            technicalOptions.forEach(option => {
+                const newOption = document.createElement('option');
+                newOption.value = option.value;
+                newOption.textContent = option.text;
+                departmentSelect.appendChild(newOption);
+            });
+        } else if (staffSelect.value === 'research') {
+            const researchOptions = [
+                { value: 'researcher', text: 'Researcher (e.g., Clinical Research, Medical Research)' },
+                { value: 'research_assistant', text: 'Research Assistant' },
+                { value: 'principal_investigator', text: 'Principal Investigator' },
+                { value: 'education_coordinator', text: 'Education Coordinator' },
+                { value: 'academic_staff', text: 'Academic Faculty/Staff' },
+                { value: 'training_specialist', text: 'Training and Development Specialist' }
+            ];
+
+            researchOptions.forEach(option => {
+                const newOption = document.createElement('option');
+                newOption.value = option.value;
+                newOption.textContent = option.text;
+                departmentSelect.appendChild(newOption);
+            });
+        } else {
+            const defaultOptions = [
+                { value: 'hr', text: 'Human Resources' },
+                { value: 'finance', text: 'Finance' },
+                { value: 'it', text: 'Information Technology' },
+                { value: 'research', text: 'Research and Development' },
+                { value: 'admin', text: 'Administration' }
+            ];
+
+            defaultOptions.forEach(option => {
+                const newOption = document.createElement('option');
+                newOption.value = option.value;
+                newOption.textContent = option.text;
+                departmentSelect.appendChild(newOption);
+            });
+        }
+    }
+
+    // Call the function on page load to set default options
+    window.onload = updateDepartmentOptions;
+</script>
+
+<!-- jQuery -->
+<script src="/static/admin_style/js/jquery-3.2.1.min.js"></script>
+
+<!-- Bootstrap Core JS -->
+<script src="/static/admin_style/js/popper.min.js"></script>
+<script src="/static/admin_style/js/bootstrap.min.js"></script>
+
+<!-- Slimscroll JS -->
+<script src="/static/admin_style/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<script src="/static/admin_style/plugins/raphael/raphael.min.js"></script>
+<script src="/static/admin_style/plugins/morris/morris.min.js"></script>
+<script src="/static/admin_style/js/chart.morris.js"></script>
+
+<!-- Custom JS -->
+<script src="/static/admin_style/js/script.js"></script>
+
+</body>
+</html>
